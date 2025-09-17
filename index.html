@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galerii Loftid OU — Maaüksuste ja taristuehituse lahendused</title>
+  <meta name="description" content="Galerii Loftid OU — maaüksuste jagamine, raske- ja rajatisehitus, ehitusjuhtimine. Tallinn, Eesti." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1115;         /* page background */
+      --panel:#171a22;      /* panels/cards */
+      --muted:#8b94a7;      /* muted text */
+      --text:#e7ecf4;       /* main text */
+      --brand:#c9a86a;      /* accent (brass/gold) */
+      --brand-2:#6bb28a;    /* secondary accent */
+      --ring: rgba(201,168,106,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;scroll-behavior:smooth}
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(1180px,92vw);margin:0 auto}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.1rem;border-radius:999px;background:linear-gradient(90deg,var(--brand) 0%, #e0cfa0 100%);color:#0d0f14;font-weight:600;border:0;cursor:pointer;transition:.25s}
+    .btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
+    .btn.ghost{background:transparent;color:var(--text);border:1px solid rgba(231,236,244,.18)}
+    .chip{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border-radius:999px;background:rgba(231,236,244,.06);border:1px solid rgba(231,236,244,.08);color:var(--muted);font-size:.85rem}
+    .nav{position:sticky;top:0;z-index:20;background:linear-gradient(180deg, rgba(15,17,21,.9) 0%, rgba(15,17,21,.6) 100%);backdrop-filter:blur(8px);border-bottom:1px solid rgba(231,236,244,.06)}
+    .nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:700;letter-spacing:.5px}
+    .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--brand)}
+    .nav a{opacity:.88;margin-left:1.1rem}
+    .nav a:hover{opacity:1}
+
+    /* HERO */
+    .hero{position:relative;min-height:84vh;display:grid;place-items:center;overflow:hidden}
+    .hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url('main1.jpg') center/cover no-repeat;
+  filter:brightness(.55) saturate(1.05);
+}
+    .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 20%, rgba(15,17,21,0) 0%, rgba(15,17,21,.35) 60%, rgba(15,17,21,.85) 100%)}
+    .hero .content{position:relative;z-index:2;text-align:center;padding:100px 0 80px}
+    .hero h1{font-size:clamp(34px,6vw,56px);line-height:1.1;margin:.5rem 0 1rem}
+    .hero p{max-width:760px;margin:0 auto 1.8rem;color:var(--muted);font-size:clamp(16px,2.2vw,18px)}
+    .hero .badges{display:flex;gap:.6rem;justify-content:center;margin:1.2rem 0 2.4rem;flex-wrap:wrap}
+
+    /* SECTIONS */
+    section{padding:72px 0}
+    .section-title{font-size:clamp(22px,3vw,30px);margin:0 0 16px}
+    .section-note{color:var(--muted);margin:0 0 28px}
+
+    .panel{background:var(--panel);border:1px solid rgba(231,236,244,.07);border-radius:18px;padding:26px}
+    .grid{display:grid;gap:18px}
+    .grid.g-3{grid-template-columns:repeat(3,1fr)}
+    .grid.g-4{grid-template-columns:repeat(4,1fr)}
+    @media (max-width:1020px){.grid.g-3{grid-template-columns:repeat(2,1fr)}.grid.g-4{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid.g-3,.grid.g-4{grid-template-columns:1fr}}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.02) 0%, rgba(255,255,255,.01) 100%);border:1px solid rgba(231,236,244,.07);border-radius:16px;overflow:hidden}
+    .card .media{position:relative;height:180px;background:#0c0e12}
+    .card .media img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.05)}
+    .card .body{padding:16px 16px 20px}
+    .card h4{margin:0 0 6px;font-size:18px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+    .stat{background:rgba(231,236,244,.04);border:1px solid rgba(231,236,244,.07);padding:14px;border-radius:12px;text-align:center}
+    .stat b{display:block;font-size:20px}
+
+    /* WHY US */
+    .why{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}
+    @media (max-width:960px){.why{grid-template-columns:1fr}}
+    .why ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+    .why li{display:flex;gap:12px;align-items:flex-start;background:rgba(231,236,244,.04);border:1px solid rgba(231,236,244,.07);padding:14px;border-radius:14px}
+    .icon{flex:0 0 28px;height:28px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--brand), #e3d2a8);box-shadow:0 0 0 6px var(--ring)}
+
+    /* PROCESS */
+    .process{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+    @media (max-width:1100px){.process{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:640px){.process{grid-template-columns:repeat(1,1fr)}}
+    .step{position:relative;padding:18px;border-radius:14px;background:rgba(231,236,244,.04);border:1px solid rgba(231,236,244,.07)}
+    .step b{display:block;margin-bottom:6px}
+    .step:after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);opacity:.45}
+    .step:last-child:after{display:none}
+
+    /* FORM */
+    form{display:grid;gap:14px}
+    input,textarea{width:100%;padding:14px 14px;border-radius:12px;border:1px solid rgba(231,236,244,.12);background:#0c0f14;color:var(--text);outline:none}
+    input:focus,textarea:focus{border-color:var(--brand)}
+    textarea{min-height:130px;resize:vertical}
+
+    /* FOOTER */
+    footer{padding:36px 0;color:var(--muted);border-top:1px solid rgba(231,236,244,.06)}
+    .mini{font-size:13px;color:var(--muted)}
+
+    .topbtn{position:fixed;right:18px;bottom:18px;background:var(--panel);border:1px solid rgba(231,236,244,.1);padding:10px 12px;border-radius:12px;opacity:.75}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap inner">
+      <div class="logo"><span class="logo-dot"></span> Galerii Loftid OU</div>
+      <div class="links">
+        <a href="#hero">Avaleht</a>
+        <a href="#about">Meist</a>
+        <a href="#services">Teenused</a>
+        <a href="#why">Miks meid</a>
+        <a href="#process">Protsess</a>
+        <a href="#contact">Kontakt</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. HERO -->
+  <header id="hero" class="hero">
+    <div class="content wrap">
+      <div class="badges">
+        <span class="chip">Maaüksuste jagamine</span>
+        <span class="chip">Raske- ja rajatisehitus</span>
+        <span class="chip">Ehitusjuhtimine</span>
+      </div>
+      <h1>Insener-teadlik ehitus partneriks sinu maa-arendusele</h1>
+      <p>Viime ideed planeeringust teostuseni: detailplaneering, taristu projekteerimine, kommunikatsioonid ja ehituse elluviimine. Terve tsükkel ühest kohast.</p>
+      <div style="margin-top:10px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a class="btn" href="#contact">Küsi pakkumist</a>
+        <a class="btn ghost" href="#services">Vaata teenuseid</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b>3+ aastat</b><span class="mini">kogemust sektoris</span></div>
+        <div class="stat"><b>50+ projekti</b><span class="mini">teed, tänavad, trassid</span></div>
+        <div class="stat"><b>3 teenusliini</b><span class="mini">planeeri–ehita–juhi</span></div>
+        <div class="stat"><b>1 partner</b><span class="mini">täisteenus</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. ABOUT -->
+    <section id="about">
+      <div class="wrap grid" style="grid-template-columns:1.05fr 1fr; gap:22px; align-items:center;">
+        <div class="panel">
+          <h2 class="section-title">Meist</h2>
+          <p class="section-note">Galerii Loftid OU ühendab maaüksuste arenduse, raske- ja rajatisehituse ning ehitusjuhtimise ühtseks tervikuks. Töötab protsess, mitte juhus — lähtume standarditest, geodeesiast ja läbipaistvast eelarvest.</p>
+          <ul style="display:grid;gap:10px;margin:18px 0 0;padding-left:18px;color:var(--muted)">
+            <li>Detail- ja üldplaneeringute ettevalmistus</li>
+            <li>Teede, platside ja insenervõrkude lahendused</li>
+            <li>Hanke ja ehituse juhtimine, omaniku järelevalve</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="media">
+            <img alt="Taristu ehitus" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1600&auto=format&fit=crop" />
+          </div>
+          <div class="body">
+            <h4>Tugimeeskond</h4>
+            <p>Projekteerijad, geodeedid ja ehitusinsenerid ühes meeskonnas — tulemuseks kiirem kooskõlastus ja väiksem risk.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SERVICES -->
+    <section id="services">
+      <div class="wrap">
+        <h2 class="section-title">Teenused</h2>
+        <p class="section-note">Katame kogu arendustsükli — alates planeerimisest kuni võtmeteni üleandmiseni.</p>
+        <div class="grid g-3">
+          <article class="card">
+           <div class="media">
+  <img src="main2.jpg" alt="Maaüksuste planeerimine"/>
+</div>
+            <div class="body"><h4>Maaüksuste planeerimine</h4><p>Detailplaneering, kruntide jagamine ja sihtotstarbed. Kooskõlastused omavalitsusega.</p></div>
+          </article>
+          <article class="card">
+            <div class="media"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop" alt="Teed ja platsid"/></div>
+            <div class="body"><h4>Teed ja platsid</h4><p>Ligipääsud, parkimisalad, kandvad kihid ja katendid. Lahendused vastavalt koormusele.</p></div>
+          </article>
+          <article class="card">
+                     <div class="media">
+  <img src="main3.jpg" alt="Kommunikatsioonid"/>
+</div>
+            <div class="body"><h4>Kommunikatsioonid</h4><p>Vesi, kanalisatsioon, sadevesi, elekter ja side. Trasside projekteerimine ja ehitus.</p></div>
+          </article>
+          <article class="card">
+            <div class="media"><img src="https://images.unsplash.com/photo-1541976590-713941681591?q=80&w=1200&auto=format&fit=crop" alt="Ehitusjuhtimine"/></div>
+            <div class="body"><h4>Ehitusjuhtimine</h4><p>Hanked, ajagraafik, eelarve, tööohutus. Omaniku järelevalve ja aktid.</p></div>
+          </article>
+          <article class="card">
+            <div class="media"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop" alt="Projekteerimise koordineerimine"/></div>
+            <div class="body"><h4>Projekteerimise koordineerimine</h4><p>Erialade koostoime: teed, geodeesia, geotehnika, arhitektuur.</p></div>
+          </article>
+          <article class="card">
+            <div class="media"><img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1200&auto=format&fit=crop" alt="Geodeesia"/></div>
+            <div class="body"><h4>Geodeesia ja mõõdistus</h4><p>Lähte- ja teostusmõõdistused, BIM-andmestik ja as-built dokumentatsioon.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WHY CHOOSE US -->
+    <section id="why">
+      <div class="wrap why">
+        <div class="panel">
+          <h2 class="section-title">Miks valida meid?</h2>
+          <p class="section-note">Praktilised, kooskõlastatavad ja ehitatavad lahendused. Aeg ja eelarve on meie tööriistad, mitte üllatused.</p>
+          <ul>
+            <li><span class="icon"></span><div><b>Ühe partneri vastutus</b><br/><span class="mini">Planeerimine, projekteerimine ja ehitusjuhtimine ühes lepingus.</span></div></li>
+            <li><span class="icon"></span><div><b>Läbipaistev eelarvestus</b><br/><span class="mini">Diskreetne hinnastamine, riskipuhvrid ja etapiviisiline arveldus.</span></div></li>
+            <li><span class="icon"></span><div><b>Standarditele vastav</b><br/><span class="mini">EVS ja kohaliku omavalitsuse nõuete täitmine, kooskõlastused kiirenevad.</span></div></li>
+            <li><span class="icon"></span><div><b>Kogemus raskes ehituses</b><br/><span class="mini">Koormusi taluvad lahendused alates aluskihtidest kuni katendini.</span></div></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="media"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1200&auto=format&fit=crop" alt="Töö käib"/></div>
+          <div class="body"><h4>Kvaliteet töömaal</h4><p>Inseneri kohalolu objektil tagab, et projekt ei jää paberile, vaid valmib vastupidava taristuna.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PROCESS -->
+    <section id="process">
+      <div class="wrap">
+        <h2 class="section-title">Meie protsess</h2>
+        <p class="section-note">Selge, etapiviisiline kulg, et jõuda loast valmimiseni.</p>
+        <div class="process">
+          <div class="step"><b>1. Esmane konsultatsioon</b><span class="mini">Eesmärgid, lähteandmed, ajaraam.</span></div>
+          <div class="step"><b>2. Planeerimine</b><span class="mini">Maaüksuste lahendus, kooskõlastuste plaan.</span></div>
+          <div class="step"><b>3. Projekteerimine</b><span class="mini">Teed, kommunikatsioonid ja konstruktsioonid.</span></div>
+          <div class="step"><b>4. Hange ja ehitus</b><span class="mini">Pakkumised, lepingud, tööde juhtimine.</span></div>
+          <div class="step"><b>5. Üleandmine</b><span class="mini">Teostusmõõdistus, aktid, as-built.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CONTACT FORM -->
+   <section id="contact">
+  <div class="wrap grid" style="grid-template-columns:1fr .9fr; gap:22px">
+    <div class="panel">
+      <h2 class="section-title">Võtke meiega ühendust</h2>
+      <p class="section-note">Kirjeldage lühidalt oma projekti — vastame ja pakume sobiva lahenduse.</p>
+      <form onsubmit="event.preventDefault(); document.getElementById('form-msg').style.display='block'; this.reset();">
+        <input required type="text" name="name" placeholder="Teie nimi" />
+        <input required type="email" name="email" placeholder="Teie e-post" />
+        <textarea required name="message" placeholder="Projektist või küsimusest"></textarea>
+        <button class="btn" type="submit">Saada sõnum</button>
+        <p id="form-msg" style="display:none; color:#6bb28a; margin-top:12px;">Sõnum on saadetud!</p>
+      </form>
+    </div>
+    <div class="card">
+      <div class="media"><img src="main3.jpg" alt="Kontaktivorm"/></div>
+      <div class="body">
+        <h4>Kiire vastus</h4>
+        <p>Vastame tööpäeviti 24 tunni jooksul. Vajadusel lepime kokku kohtumise objektile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- 7. CONTACTS (address + email) -->
+    <section id="contacts">
+      <div class="wrap panel">
+        <h2 class="section-title">Kontaktid</h2>
+        <div class="grid g-3">
+          <div class="card">
+            <div class="body">
+              <h4>Aadress</h4>
+              <p>Maakri tn 19/1, 10145 Tallinn, Eesti</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="body">
+              <h4>E-post</h4>
+              <p><a href="mailto:endo@galeriiloftid.org">endo@galeriiloftid.org</a></p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="body">
+              <h4>Õigusvaldkond</h4>
+              <p class="mini">Land Subdivision · Heavy and Civil Engineering Construction · Construction</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
+      <div class="mini">© <span id="y"></span>Galerii Loftid OÜ. Kõik õigused kaitstud.U</div>
+      <a class="topbtn" href="#hero">Tagasi üles</a>
+    </div>
+  </footer>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
